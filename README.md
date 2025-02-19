@@ -1,17 +1,14 @@
 # Book Recommendation System
 
 #### Author: Mili Ketan Thakrar
-
 #### Date: TBD
-
 #### Product Demo: [To be completed as the project progresses]
-
 #### Dataset link: https://www.kaggle.com/datasets/arashnic/book-recommendation-dataset
 
 ## 1. Project Overview
 
 ### Problem Area
-With the vast number of books available, readers often struggle to find new titles that match their interests, leading to decreased engagement with reading. This project aims to develop a sophisticated book recommendation system using collaborative filtering techniques to analyze user ratings, reading history, and book metadata, providing personalized book recommendations to enhance the reading experience for users.
+With the vast number of books available, readers often struggle to find new titles that match their interests, leading to decreased engagement with reading. This project aims to develop a sophisticated book recommendation system using a hybrid approach that combines collaborative filtering and content-based filtering techniques to analyze user ratings, reading history, and book metadata, providing personalized book recommendations to enhance the reading experience for users.
 
 ### Those Affected
 - Readers seeking new books aligned with their preferences
@@ -19,24 +16,25 @@ With the vast number of books available, readers often struggle to find new titl
 - Publishers aiming to increase book discoverability
 
 ### Proposed Data Science Solution
-We will create a recommendation engine using collaborative filtering, which will suggest relevant books to users based on their past preferences and similarities with other users. The project will involve:
-1. Data collection and preprocessing
-2. Exploratory data analysis
-3. Implementation of collaborative filtering algorithms
-4. Evaluation and optimization of the recommendation system
+We will create a hybrid recommendation engine that combines collaborative filtering and content-based filtering, which will suggest relevant books to users based on their past preferences, similarities with other users, and book content features. The project will involve:
+
+- Data collection and preprocessing
+- Exploratory data analysis
+- Implementation of collaborative filtering algorithms
+- Development of content-based filtering techniques
+- Integration of both approaches into a hybrid model
+- Evaluation and optimization of the recommendation system
 
 ### Impact of the Solution
 By providing personalized book recommendations, we aim to:
+
 - Increase reader engagement and satisfaction
 - Help readers discover new authors and genres
 - Potentially boost book sales and library circulation
+- Improve recommendation accuracy and diversity
 
 ## 2. Data Information
 
-### Brief Description
-The dataset is from the Book-Crossing collection, compiled by Cai-Nicolas Ziegler. It contains 278,858 users providing 1,149,780 ratings for 271,379 books.
-
-### Data Dictionary
 #### Books Table
 
 | Field Name | Type | Description |
@@ -72,29 +70,36 @@ The dataset is from the Book-Crossing collection, compiled by Cai-Nicolas Ziegle
 2. Data Preprocessing:
    - Handle missing values
    - Clean and normalize the dataset
+   - Extract relevant features for content-based filtering
 
 3. Exploratory Data Analysis:
    - Analyze user reading patterns and book popularity distributions
    - Identify potential challenges such as data sparsity or cold start problems
+   - Explore book content features for content-based filtering
 
 4. Initial Model Development:
    - Implement basic collaborative filtering algorithm
-   - Explore both user-based and item-based collaborative filtering methods
+   - Develop content-based filtering using book features
 
-5. Evaluation Metric Selection:
-   - Determine appropriate metrics (e.g., RMSE, MAP@K)
+5. Hybrid Model Integration:
+   - Combine collaborative and content-based approaches
+   - Experiment with different weighting schemes for the hybrid model
 
-6. Advanced Modeling:
-   - Refine collaborative filtering model
+6. Evaluation Metric Selection:
+   - Determine appropriate metrics (e.g., RMSE, MAP@K, diversity measures)
+
+7. Advanced Modeling:
+   - Refine hybrid model
    - Explore matrix factorization techniques
    - Address cold start problems and improve recommendation diversity
 
-7. User Interface Development:
+8. User Interface Development:
    - Create a simple interface to demonstrate the recommendation system
 
-8. Testing and Optimization:
+9. Testing and Optimization:
    - Conduct user testing
    - Gather feedback on recommendation relevance and system usability
+   - Fine-tune the hybrid model based on performance and user feedback
 
 ## 4. Repository Navigation
 
