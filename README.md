@@ -1,7 +1,7 @@
 # Book Recommendation System
 
 #### Author: Mili Ketan Thakrar  
-#### Date: February 21, 2025  
+#### Date: TBD  
 #### Product Demo: [To be completed as the project progresses]  
 #### Dataset link: [Kaggle Book Recommendation Dataset](https://www.kaggle.com/datasets/arashnic/book-recommendation-dataset)  
 
