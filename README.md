@@ -1,14 +1,14 @@
 # Book Recommendation System
 
-#### Author: Mili Ketan Thakrar
-#### Date: TBD
-#### Product Demo: [To be completed as the project progresses]
-#### Dataset link: https://www.kaggle.com/datasets/arashnic/book-recommendation-dataset
+#### Author: Mili Ketan Thakrar  
+#### Date: February 21, 2025  
+#### Product Demo: [To be completed as the project progresses]  
+#### Dataset link: [Kaggle Book Recommendation Dataset](https://www.kaggle.com/datasets/arashnic/book-recommendation-dataset)  
 
 ## 1. Project Overview
 
 ### Problem Area
-With the vast number of books available, readers often struggle to find new titles that match their interests, leading to decreased engagement with reading. This project aims to develop a sophisticated book recommendation system using a hybrid approach that combines collaborative filtering and content-based filtering techniques to analyze user ratings, reading history, and book metadata, providing personalized book recommendations to enhance the reading experience for users.
+Readers often struggle to find new titles that match their interests, leading to decreased engagement with reading. This project aims to develop a sophisticated book recommendation system using a hybrid approach that combines collaborative filtering and content-based filtering techniques to analyze user ratings, reading history, and book metadata, providing personalized recommendations.
 
 ### Those Affected
 - Readers seeking new books aligned with their preferences
@@ -16,7 +16,7 @@ With the vast number of books available, readers often struggle to find new titl
 - Publishers aiming to increase book discoverability
 
 ### Proposed Data Science Solution
-We will create a hybrid recommendation engine that combines collaborative filtering and content-based filtering, which will suggest relevant books to users based on their past preferences, similarities with other users, and book content features. The project will involve:
+We will create a hybrid recommendation engine that combines collaborative filtering and content-based filtering, suggesting relevant books based on user preferences and book features. The project will involve:
 
 - Data collection and preprocessing
 - Exploratory data analysis
@@ -26,11 +26,10 @@ We will create a hybrid recommendation engine that combines collaborative filter
 - Evaluation and optimization of the recommendation system
 
 ### Impact of the Solution
-By providing personalized book recommendations, we aim to:
-
+By providing personalized recommendations, we aim to:
 - Increase reader engagement and satisfaction
 - Help readers discover new authors and genres
-- Potentially boost book sales and library circulation
+- Boost book sales and library circulation
 - Improve recommendation accuracy and diversity
 
 ## 2. Data Information
@@ -39,20 +38,20 @@ By providing personalized book recommendations, we aim to:
 
 | Field Name | Type | Description |
 |------------|------|-------------|
-| ISBN | string | International Standard Book Number, unique identifier for books |
+| ISBN | string | Unique identifier for books |
 | Title | string | The title of the book |
-| Author | string | The name of the book's author |
-| Publisher | string | The name of the book's publisher |
-| Publication_year | int | The year the book was published |
-| Image_URL | string | URL link to the book's cover image |
+| Author | string | The name of the author |
+| Publisher | string | The name of the publisher |
+| Publication_year | int | The year published |
+| Image_URL | string | URL link to the cover image |
 
 #### Ratings Table
 
 | Field Name | Type | Description |
 |------------|------|-------------|
 | User_id | float | Unique identifier for each user |
-| ISBN | string | International Standard Book Number of the rated book |
-| Ratings | float | User's rating of the book, scale of 1-10 |
+| ISBN | string | ISBN of the rated book |
+| Ratings | float | User's rating (1-10) |
 
 #### Users Table
 
@@ -60,46 +59,52 @@ By providing personalized book recommendations, we aim to:
 |------------|------|-------------|
 | User_id | float | Unique identifier for each user |
 | Age | float | Age of the user |
-| Location | string | Location where the user is located |
+| Location | string | User's location |
 
 ## 3. Project Workflow
 
-1. Data Collection:
-   - Download dataset from Kaggle
+1. **Data Collection**:  
+   - Download dataset from Kaggle.
 
-2. Data Preprocessing:
-   - Handle missing values
-   - Clean and normalize the dataset
-   - Extract relevant features for content-based filtering
+2. **Data Preprocessing**:  
+   - Handle missing values, clean data, and normalize text.
 
-3. Exploratory Data Analysis:
-   - Analyze user reading patterns and book popularity distributions
-   - Identify potential challenges such as data sparsity or cold start problems
-   - Explore book content features for content-based filtering
+3. **Exploratory Data Analysis**:  
+   - Analyze reading patterns and book popularity.
+   - Identify challenges like data sparsity or cold start problems.
+   - Explore distributions of ratings, users, and books.
 
-4. Initial Model Development:
-   - Implement basic collaborative filtering algorithm
-   - Develop content-based filtering using book features
+4. **NLP for Book Titles**:  
+   - Apply NLP techniques to extract meaningful features from book titles.
+   - Techniques include:
+     - Tokenization
+     - Keyword Extraction
+     - TF-IDF
+   - These features will enhance content-based filtering.
 
-5. Hybrid Model Integration:
-   - Combine collaborative and content-based approaches
-   - Experiment with different weighting schemes for the hybrid model
+5. **Initial Model Development**:  
+   - Implement collaborative filtering algorithms.
+   - Develop content-based filtering using extracted features.
 
-6. Evaluation Metric Selection:
-   - Determine appropriate metrics (e.g., RMSE, MAP@K, diversity measures)
+6. **Hybrid Model Integration**:  
+   - Combine collaborative and content-based approaches.
+   - Experiment with different weighting schemes.
 
-7. Advanced Modeling:
-   - Refine hybrid model
-   - Explore matrix factorization techniques
-   - Address cold start problems and improve recommendation diversity
+7. **Evaluation Metric Selection**:  
+   - Use metrics like RMSE, MAP@K, or diversity measures.
 
-8. User Interface Development:
-   - Create a simple interface to demonstrate the recommendation system
+8. **Advanced Modeling**:  
+   - Refine hybrid models.
+   - Explore matrix factorization techniques.
+   - Address cold start problems.
 
-9. Testing and Optimization:
-   - Conduct user testing
-   - Gather feedback on recommendation relevance and system usability
-   - Fine-tune the hybrid model based on performance and user feedback
+9. **User Interface Development**:  
+   - Create a simple interface to demonstrate recommendations.
+
+10. **Testing and Optimization**:  
+    - Conduct user testing.
+    - Gather feedback on recommendation relevance.
+    - Fine-tune models based on performance.
 
 ## 4. Repository Navigation
 
@@ -107,4 +112,4 @@ By providing personalized book recommendations, we aim to:
 
 ## 5. Setup
 
-I've included all the appropriate packages needed to be installed in the environment file book_recommendation_env.yml
+All necessary packages are included in the environment file `book_recommendation_env.yml`.
