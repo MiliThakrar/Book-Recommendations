@@ -1,10 +1,11 @@
 # Book Recommendation System
 
 **Author:** Mili Ketan Thakrar
+
 **Date:** June 2025
+
 **Dataset:** [Kaggle Book Recommendation Dataset](https://www.kaggle.com/datasets/arashnic/book-recommendation-dataset)
 
----
 
 ## ✨ Executive Summary
 
@@ -12,7 +13,6 @@ In a world overflowing with reading options, identifying the next great read rem
 
 The final solution addresses the **cold start problem**, balances **accuracy with diversity**, and can be adapted for commercial use by **libraries, bookstores, or digital reading platforms**.
 
----
 
 ## 🔗 Problem Statement
 
@@ -22,7 +22,6 @@ Many readers struggle to find books that align with their tastes, particularly w
 * Tackle challenges like **data sparsity**, **cold starts**, and **rating inconsistencies**.
 * Provide a solution that works at scale and across user demographics.
 
----
 
 ## 📑 Dataset Overview
 
@@ -55,7 +54,6 @@ The project uses three core tables:
 | Age      | User age               |
 | Location | Geographical info      |
 
----
 
 ## 📊 Key Steps & Methodology
 
@@ -102,7 +100,6 @@ The project uses three core tables:
 
 * While the FunkSVD model outperformed the hybrid version in terms of RMSE, the hybrid model is designed to enhance diversity and offer fallback logic for new users/books.
 
----
 
 ## 🤝 Final Outcomes
 
@@ -110,7 +107,6 @@ The project uses three core tables:
 * Addressed cold start problem using semantic content analysis and genre metadata.
 * Delivered personalized recommendations without requiring heavy computational infrastructure.
 
----
 
 ## 🚀 Deployment & Next Steps
 
@@ -120,7 +116,6 @@ The project uses three core tables:
   * Fine-tune hybrid weights based on user feedback.
   * Experiment with contextual recommendations (e.g., time, mood).
 
----
 
 ## 📂 Repository Structure
 
@@ -137,7 +132,6 @@ The project uses three core tables:
 └── README.md
 ```
 
----
 
 ## 🚪 Setup Instructions
 
@@ -156,7 +150,6 @@ The project uses three core tables:
    streamlit run app.py
    ```
 
----
 
 ## 📄 License & Credits
 
@@ -164,7 +157,6 @@ The project uses three core tables:
 * Embeddings: [GloVe](https://nlp.stanford.edu/projects/glove/)
 * Genre Metadata: Open-source Book Genre API
 
----
 
 ## 📢 Connect
 
