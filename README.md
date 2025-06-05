@@ -1,120 +1,171 @@
 # Book Recommendation System
 
-#### Author: Mili Ketan Thakrar  
-#### Date: TBD  
-#### Product Demo: [To be completed as the project progresses]  
-#### Dataset link: [Kaggle Book Recommendation Dataset](https://www.kaggle.com/datasets/arashnic/book-recommendation-dataset)  
+**Author:** Mili Ketan Thakrar
+**Date:** June 2025
+**Dataset:** [Kaggle Book Recommendation Dataset](https://www.kaggle.com/datasets/arashnic/book-recommendation-dataset)
 
-## 1. Project Overview
+---
 
-### Problem Area
-Readers often struggle to find new titles that match their interests, leading to decreased engagement with reading. This project aims to develop a sophisticated book recommendation system using a hybrid approach that combines collaborative filtering and content-based filtering techniques to analyze user ratings, reading history, and book metadata, providing personalized recommendations.
+## ✨ Executive Summary
 
-### Those Affected
-- Readers seeking new books aligned with their preferences
-- Libraries and bookstores looking to improve customer engagement
-- Publishers aiming to increase book discoverability
+In a world overflowing with reading options, identifying the next great read remains a challenge for book lovers. This project develops a **hybrid book recommendation system** that combines content-based filtering with matrix factorization (FunkSVD). By leveraging user ratings, book metadata, genre information, and textual features, the system provides personalized suggestions that enhance reader satisfaction, promote exploration, and support the publishing ecosystem.
 
-### Proposed Data Science Solution
-We will create a hybrid recommendation engine that combines collaborative filtering and content-based filtering, suggesting relevant books based on user preferences and book features. The project will involve:
+The final solution addresses the **cold start problem**, balances **accuracy with diversity**, and can be adapted for commercial use by **libraries, bookstores, or digital reading platforms**.
 
-- Data collection and preprocessing
-- Exploratory data analysis
-- Implementation of content-based filtering techniques
-- Implementation of collaborative filtering algorithms
-- Integration of both approaches into a hybrid model
-- Evaluation and optimization of the recommendation system
+---
 
-### Impact of the Solution
-By providing personalized recommendations, we aim to:
-- Increase reader engagement and satisfaction
-- Help readers discover new authors and genres
-- Boost book sales and library circulation
-- Improve recommendation accuracy and diversity
+## 🔗 Problem Statement
 
-## 2. Data Information
+Many readers struggle to find books that align with their tastes, particularly when entering new genres or platforms. This leads to missed opportunities for engagement. Our goal is to:
 
-#### Books Table
+* Recommend books based on **user behavior and content similarity**.
+* Tackle challenges like **data sparsity**, **cold starts**, and **rating inconsistencies**.
+* Provide a solution that works at scale and across user demographics.
 
-| Field Name | Type | Description |
-|------------|------|-------------|
-| ISBN | string | Unique identifier for books |
-| Title | string | The title of the book |
-| Author | string | The name of the author |
-| Publisher | string | The name of the publisher |
-| Publication_year | int | The year published |
-| Image_URL | string | URL link to the cover image |
+---
 
-#### Ratings Table
+## 📑 Dataset Overview
 
-| Field Name | Type | Description |
-|------------|------|-------------|
-| User_id | float | Unique identifier for each user |
-| ISBN | string | ISBN of the rated book |
-| Ratings | float | User's rating (1-10) |
+The project uses three core tables:
 
-#### Users Table
+### ✉️ Books Table
 
-| Field Name | Type | Description |
-|------------|------|-------------|
-| User_id | float | Unique identifier for each user |
-| Age | float | Age of the user |
-| Location | string | User's location |
+| Field      | Description            |
+| ---------- | ---------------------- |
+| ISBN       | Unique book identifier |
+| Title      | Book name              |
+| Author     | Book author            |
+| Publisher  | Publisher name         |
+| Year       | Year of publication    |
+| Image\_URL | Book cover image URL   |
 
-# Book Recommendation System
+### ⭐ Ratings Table
 
-## 3. Project Workflow (Revised)
+| Field   | Description            |
+| ------- | ---------------------- |
+| User ID | Unique user identifier |
+| ISBN    | Book identifier        |
+| Rating  | Score (1-10)           |
 
-1. **Data Collection**:
-   - Download dataset from Kaggle.
+### 👤 Users Table
 
-2. **Data Preprocessing**:
-   - Handle missing values, clean data, and normalize text.
+| Field    | Description            |
+| -------- | ---------------------- |
+| User ID  | Unique user identifier |
+| Age      | User age               |
+| Location | Geographical info      |
 
-3. **Exploratory Data Analysis**:
-   - Analyze reading patterns and book popularity.
-   - Identify challenges like data sparsity or cold start problems.
-   - Explore distributions of ratings, users, and books.
+---
 
-4. **Baseline Modeling**:
-   - **Content-Based Filtering**:
-     - Implement TF-IDF vectorization of book titles/authors
-     - Compute cosine similarity between book features
-     - Generate recommendations based on feature similarity
-   - **Logistic Regression**:
-     - Predict user preferences based on book metadata
-     - Establish baseline performance metrics
+## 📊 Key Steps & Methodology
 
-5. **NLP and Word Embeddings**:
-   - Utilize GloVe pretrained word embeddings for title analysis
-   - Download GloVe embeddings from [https://nlp.stanford.edu/projects/glove/](https://nlp.stanford.edu/projects/glove/) (glove.6B.zip recommended)
-   - Combine with cosine similarity for enhanced content-based recommendations
+### 1. Data Wrangling & Cleaning
 
-6. **Advanced Modeling**:
-   - **Collaborative Filtering**:
-     - Implement user-item matrix factorization
-     - Develop neighborhood-based recommendation algorithms
-   - **Hybrid Approach**:
-     - Combine content-based and collaborative filtering outputs
-     - Implement weighted hybrid recommendation engine
-     - Experiment with stacking ensemble methods
+* Merged the three datasets and removed nulls, duplicates, and incorrect ISBNs.
+* Standardized text formats (e.g., title casing, punctuation removal).
 
-7. **Evaluation Metric Selection**:
-   - Use metrics like RMSE, MAP@K, and diversity measures
+### 2. Exploratory Data Analysis (EDA)
 
-8. **Model Refinement**:
-   - Address cold start problems using content features
-   - Implement matrix factorization with implicit feedback
-   - Optimize hyperparameters using grid search
+* Visualized rating distribution (skewed toward 8-10).
+* Identified top-rated books and frequently rated titles.
+* Analyzed age distributions and geographic spread of users.
 
-9. **User Interface Development**:
-   - Create recommendation demonstration interface
-   - Implement basic search and recommendation display
+### 3. Content-Based Filtering
 
+* Applied **TF-IDF vectorization** on book titles.
+* Used **cosine similarity** to recommend books based on textual metadata.
+* Integrated **GloVe embeddings** to enhance semantic understanding of titles.
+* **Enriched book metadata** by fetching genre information via an open-source book genre API to improve similarity matching.
 
-## 4. Repository Navigation
-[To be completed as the project progresses]
+### 4. Collaborative Filtering with FunkSVD
 
-## 5. Setup
-All necessary packages are included in `book_recommendation_env.yml`.
+* Constructed a user-item matrix.
+* Data filtering (users with >200 ratings and books with >50 reviews) was **applied at this stage** to improve model robustness.
+* Implemented **FunkSVD** (a matrix factorization technique) to model latent user-book interactions.
+* Tuned hyperparameters including number of latent features, learning rate, and iterations.
+* Final model evaluation was performed on the test set.
 
+### 5. Hybrid Recommendation Strategy
+
+* Combined normalized scores from content-based and FunkSVD models.
+* Used weighted averaging to generate final ranked recommendations.
+* Ensured fallback mechanism to use content-based scores for new users/books (cold start).
+
+### 6. Evaluation & Metrics
+
+* **RMSE (Root Mean Square Error)** was the primary evaluation metric.
+
+| Model Type           | RMSE Score |
+| -------------------- | ---------- |
+| FunkSVD              | 3.2648     |
+| Hybrid (Weighted)    | 3.6262     |
+
+* While the FunkSVD model outperformed the hybrid version in terms of RMSE, the hybrid model is designed to enhance diversity and offer fallback logic for new users/books.
+
+---
+
+## 🤝 Final Outcomes
+
+* Successfully implemented a hybrid book recommender system.
+* Addressed cold start problem using semantic content analysis and genre metadata.
+* Delivered personalized recommendations without requiring heavy computational infrastructure.
+
+---
+
+## 🚀 Deployment & Next Steps
+
+* A **Streamlit application** has been developed to demonstrate the recommendation system with an interactive UI.
+* Future enhancements:
+
+  * Fine-tune hybrid weights based on user feedback.
+  * Experiment with contextual recommendations (e.g., time, mood).
+
+---
+
+## 📂 Repository Structure
+
+```
+.
+├── Data/               # All datasets and Python data wrangling scripts
+├── Notebooks/          # Jupyter Notebooks
+├── Models/             # Saved model files (e.g., .pkl)
+├── Slides/             # Presentation decks
+├── Doc/                # Initial idea and planning documents
+├── Streamlit/          # Streamlit app (.py) for interactive demo
+├── .gitignore
+├── book_recommendation_env.yml
+└── README.md
+```
+
+---
+
+## 🚪 Setup Instructions
+
+1. Clone this repository.
+2. Create the environment:
+
+   ```bash
+   conda env create -f book_recommendation_env.yml
+   conda activate book_recommendation
+   ```
+3. Run notebooks in sequence.
+4. To launch the Streamlit app:
+
+   ```bash
+   cd Streamlit
+   streamlit run app.py
+   ```
+
+---
+
+## 📄 License & Credits
+
+* Dataset: Kaggle Book Recommendation Dataset
+* Embeddings: [GloVe](https://nlp.stanford.edu/projects/glove/)
+* Genre Metadata: Open-source Book Genre API
+
+---
+
+## 📢 Connect
+
+Feel free to connect with me on [LinkedIn](https://www.linkedin.com/in/mili-ketan-thakrar) or reach out via email for collaborations or questions!
