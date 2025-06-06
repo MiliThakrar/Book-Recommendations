@@ -1,8 +1,11 @@
 # Book Recommendation System
 
 **Author:** Mili Ketan Thakrar
+
 **Date:** June 2025
+
 **Dataset:** [Kaggle Book Recommendation Dataset](https://www.kaggle.com/datasets/arashnic/book-recommendation-dataset)
+
 **Live Demo:** [Try the Streamlit App](https://book-recommendations-r8wirca.streamlit.app/)
 
 
