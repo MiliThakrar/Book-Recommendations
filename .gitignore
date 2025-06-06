@@ -6,3 +6,4 @@ Data/glove.6B.100d.txt
 Data/glove.gensim.txt
 last_completed_index_10000.txt
 models/book_title_embeddings_updated.pkl
+.venv
