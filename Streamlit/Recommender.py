@@ -4,28 +4,37 @@ from surprise import dump
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics.pairwise import cosine_similarity
+import boto3
+import os
 
-# Cache models and data for performance
+# ====== S3 CONFIGURATION ======
+S3_BUCKET = 'milliebookrecommendations'  
+S3_MODEL_KEY = 'book_title_embeddings_updated.pkl'  
+LOCAL_COLLAB_MODEL_PATH = '../models/funkSVD_model.pkl'  
+
+# ====== MODEL LOADING ======
 @st.cache_resource
 def load_models():
-    with open('../models/book_title_embeddings_updated.pkl', 'rb') as f:
+    # Download embeddings model from S3 if not present
+    s3 = boto3.client('s3')
+    local_model_path = '/tmp/book_title_embeddings_updated.pkl'
+    if not os.path.exists(local_model_path):
+        s3.download_file(S3_BUCKET, S3_MODEL_KEY, local_model_path)
+
+    # Load embeddings DataFrame
+    with open(local_model_path, 'rb') as f:
         df = pickle.load(f)
-    _, collab_model = dump.load('../models/funkSVD_model.pkl')
+
+    # Load collaborative model from local file
+    _, collab_model = dump.load(LOCAL_COLLAB_MODEL_PATH)
     return df, collab_model
 
 df, collab_model = load_models()
 
-# Optional: Initialize user history if you want to use it
-# if 'history' not in st.session_state:
-#     st.session_state.history = []
-
+# ====== RECOMMENDATION FUNCTION ======
 def hybrid_recommendation(
     df, collab_model, user_id=None, user_query=None, top_n=10, alpha=0.5, emb_col='Text_emb'
 ):
-    """
-    Generate hybrid book recommendations.
-    """
-    # Map title to ISBN if needed
     if not user_query:
         raise ValueError("Please provide a book title or ISBN as user_query.")
     if user_query in df['ISBN'].values:
@@ -57,14 +66,11 @@ def hybrid_recommendation(
     else:  # Content-only mode
         df['hybrid_score'] = df['content_score']
 
-    # Filter out history (optional)
-    # df = df[~df['ISBN'].isin(st.session_state.history)]
-
     # Show top recommendations (include Image_URL)
     result = df.sort_values('hybrid_score', ascending=False)
     return result[['Title', 'Author', 'Genre', 'Image_URL', 'hybrid_score']].head(top_n)
 
-# Streamlit UI
+# ====== STREAMLIT UI ======
 st.title("Book Recommender")
 st.markdown("""
 Welcome to the Book Recommender!
@@ -73,6 +79,7 @@ Discover new books tailored to your tastes.
 This app uses both your favorite books and your reading history (if available) to suggest titles you'll love.  
 Select a book you like below, and get personalized recommendations!
 """)
+
 # Search-as-you-type for book title
 user_query_input = st.text_input("Search Book Title", help="Start typing to see matching titles")
 matching_titles = [title for title in df['Title'].unique() if user_query_input.lower() in title.lower()]
@@ -99,7 +106,6 @@ if st.button("Recommend Me Some Books"):
             alpha=ALPHA
         )
         for _, row in recommendations.iterrows():
-            # Use columns for better layout
             col1, col2 = st.columns([1, 4])
             with col1:
                 if 'Image_URL' in row and pd.notnull(row['Image_URL']) and isinstance(row['Image_URL'], str):
@@ -114,8 +120,5 @@ if st.button("Recommend Me Some Books"):
                 st.write(f"**Author:** {row['Author']}")
                 st.write(f"**Genre:** {row['Genre']}")
             st.write("---")
-            # Optional: Add to session state history
-            # st.session_state.history.append(row['ISBN'])
     except Exception as e:
         st.error(str(e))
-
