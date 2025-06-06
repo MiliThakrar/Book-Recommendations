@@ -10,24 +10,28 @@ import os
 # ====== S3 CONFIGURATION ======
 S3_BUCKET = 'milliebookrecommendations'  
 S3_MODEL_KEY = 'book_title_embeddings_updated.pkl'  
-LOCAL_COLLAB_MODEL_PATH = '../models/funkSVD_model.pkl'  
+S3_COLLAB_MODEL_KEY = 'funkSVD_model.pkl'  # S3 key for FunkSVD model
 
-# ====== MODEL LOADING ======
 @st.cache_resource
 def load_models():
-    # Download embeddings model from S3 if not present
     s3 = boto3.client('s3')
-    local_model_path = '/tmp/book_title_embeddings_updated.pkl'
-    if not os.path.exists(local_model_path):
-        s3.download_file(S3_BUCKET, S3_MODEL_KEY, local_model_path)
 
-    # Load embeddings DataFrame
-    with open(local_model_path, 'rb') as f:
+    # Download embeddings model from S3 if not present
+    local_emb_path = '/tmp/book_title_embeddings_updated.pkl'
+    if not os.path.exists(local_emb_path):
+        s3.download_file(S3_BUCKET, S3_MODEL_KEY, local_emb_path)
+
+    with open(local_emb_path, 'rb') as f:
         df = pickle.load(f)
 
-    # Load collaborative model from local file
-    _, collab_model = dump.load(LOCAL_COLLAB_MODEL_PATH)
+    # Download FunkSVD model from S3 if not present
+    local_collab_model_path = '/tmp/funkSVD_model.pkl'
+    if not os.path.exists(local_collab_model_path):
+        s3.download_file(S3_BUCKET, S3_COLLAB_MODEL_KEY, local_collab_model_path)
+
+    _, collab_model = dump.load(local_collab_model_path)
     return df, collab_model
+
 
 df, collab_model = load_models()
 
