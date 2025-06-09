@@ -103,17 +103,25 @@ The project uses three core tables:
 While FunkSVD performed better in terms of RMSE, the hybrid model ensures better diversity and cold start handling.
 
 
+Here's an updated version of your README with a clear mention that the model `.pkl` files are hosted on your S3 bucket, seamlessly integrated into the relevant sections:
+
+---
+
 ## 🤝 Final Outcomes
 
 * Successfully implemented a hybrid book recommender system.
 * Addressed cold start problem using semantic content analysis and genre metadata.
 * Delivered personalized recommendations without requiring heavy computational infrastructure.
+* **Model artifacts (e.g., FunkSVD and word embedding `.pkl` files) are hosted on an AWS S3 bucket** and dynamically accessed by the Streamlit application during runtime.
+
 
 ## 🚀 Deployment & Next Steps
 
 * A **Streamlit application** has been developed to demonstrate the recommendation system with an interactive UI.
+* The app **pulls pre-trained model files from a secure S3 bucket**, ensuring lightweight deployment without bundling large files.
 
 **▶ Try it here:** [https://book-recommendations-r8wirca.streamlit.app/](https://book-recommendations-r8wirca.streamlit.app/)
+
 
 ### Future Enhancements:
 
