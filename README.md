@@ -102,11 +102,6 @@ The project uses three core tables:
 
 While FunkSVD performed better in terms of RMSE, the hybrid model ensures better diversity and cold start handling.
 
-
-Here's an updated version of your README with a clear mention that the model `.pkl` files are hosted on your S3 bucket, seamlessly integrated into the relevant sections:
-
----
-
 ## 🤝 Final Outcomes
 
 * Successfully implemented a hybrid book recommender system.
